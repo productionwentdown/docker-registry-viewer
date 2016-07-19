@@ -1,0 +1,141 @@
+GET https://ep.wps.kingsoft.net:5000/v2/mysql/manifests/5.5
+
+
+
+HTTP/1.1 200 OK
+Content-Length: 11739
+Content-Type: application/vnd.docker.distribution.manifest.v1+prettyjws
+Docker-Content-Digest: sha256:e1d34e3e1ed87cf9e3e48913ac396fed3b3995e5308d368cdd2743a01b6e0114
+Docker-Distribution-Api-Version: registry/2.0
+Etag: "sha256:e1d34e3e1ed87cf9e3e48913ac396fed3b3995e5308d368cdd2743a01b6e0114"
+X-Content-Type-Options: nosniff
+Date: Thu, 23 Jun 2016 03:26:42 GMT
+
+{
+   "schemaVersion": 1,
+   "name": "mysql",
+   "tag": "5.5",
+   "architecture": "amd64",
+   "fsLayers": [
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:5382e2dca1de69f35fc5c87c2c5adcb7de0e77763fb939dd1c699135cec8fd09"
+      },
+      {
+         "blobSum": "sha256:5ab6c1935226ff74d520e6b64e356a1b8b27ff16cf8fc50bcdbac8450fb847c0"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:570fd88fb2fab7a46a6e05fb37e008b40bbb7ec98baceca9302164bc4577561d"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:fae5cef29dbb3c41f806b34f50a1bb78d3aaaaa7905036ee63959f3591289ef3"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:fa4164e080ec55fa4da01330321eef8b714e708c6765504ca9d08bc3eb9fea42"
+      },
+      {
+         "blobSum": "sha256:7d307c222ea0c6d36a267c8f283fa9d0f0746fde4cf02ea3cb488ad2aa5a7554"
+      },
+      {
+         "blobSum": "sha256:d347a60f2547ec23a95f6a82a7d86bfc3175111f4f730daf0b09e4d3adc875f3"
+      },
+      {
+         "blobSum": "sha256:af2f7dea6ac4ff69653a5e38cdac6f32baf68e82a9a226e10944d4986b1fe699"
+      },
+      {
+         "blobSum": "sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4"
+      },
+      {
+         "blobSum": "sha256:efd26ecc95486998b41b3fe167236e3fb3e109c66dd1a51ab5161e40b06cf486"
+      }
+   ],
+   "history": [
+      {
+         "v1Compatibility": "{\"architecture\":\"amd64\",\"config\":{\"Hostname\":\"bcad5a346f31\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"ExposedPorts\":{\"3306/tcp\":{}},\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/mysql/bin:/usr/local/mysql/scripts\",\"MYSQL_MAJOR=5.5\",\"MYSQL_VERSION=5.5.49\"],\"Cmd\":[\"mysqld\"],\"Image\":\"40995a65eb4d6a74524dda3b52661ca2fb18019c5ba9fbf95a51ada78119b1b4\",\"Volumes\":{\"/var/lib/mysql\":{}},\"WorkingDir\":\"\",\"Entrypoint\":[\"docker-entrypoint.sh\"],\"OnBuild\":[],\"Labels\":{}},\"container\":\"028418491d5fbe3607298c61b6c71d142cf2ef917c9f9b020134f3a98517a064\",\"container_config\":{\"Hostname\":\"bcad5a346f31\",\"Domainname\":\"\",\"User\":\"\",\"AttachStdin\":false,\"AttachStdout\":false,\"AttachStderr\":false,\"ExposedPorts\":{\"3306/tcp\":{}},\"Tty\":false,\"OpenStdin\":false,\"StdinOnce\":false,\"Env\":[\"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/mysql/bin:/usr/local/mysql/scripts\",\"MYSQL_MAJOR=5.5\",\"MYSQL_VERSION=5.5.49\"],\"Cmd\":[\"/bin/sh\",\"-c\",\"#(nop) CMD [\\\"mysqld\\\"]\"],\"Image\":\"40995a65eb4d6a74524dda3b52661ca2fb18019c5ba9fbf95a51ada78119b1b4\",\"Volumes\":{\"/var/lib/mysql\":{}},\"WorkingDir\":\"\",\"Entrypoint\":[\"docker-entrypoint.sh\"],\"OnBuild\":[],\"Labels\":{}},\"created\":\"2016-04-12T17:07:52.867557084Z\",\"docker_version\":\"1.9.1\",\"id\":\"42c24d66a06cc6585be399c795c2b1458d295a8d6e126447e844c681c0771df3\",\"os\":\"linux\",\"parent\":\"2cc0bc928bb1e6caf5a1332bb36ea6d55d33280dc6f53a4512e661cab2335b08\"}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"2cc0bc928bb1e6caf5a1332bb36ea6d55d33280dc6f53a4512e661cab2335b08\",\"parent\":\"ec2f5f8b27bf07939b2c4af23643e0ba262f582556ddb3e359c55da16fcb9d79\",\"created\":\"2016-04-12T17:07:52.219362481Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) EXPOSE 3306/tcp\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"ec2f5f8b27bf07939b2c4af23643e0ba262f582556ddb3e359c55da16fcb9d79\",\"parent\":\"a47befb1cf1e714e27e8199409e62729cb478616c729d6c4a3b14700085bf300\",\"created\":\"2016-04-12T17:07:51.523238873Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) ENTRYPOINT \\u0026{[\\\"docker-entrypoint.sh\\\"]}\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"a47befb1cf1e714e27e8199409e62729cb478616c729d6c4a3b14700085bf300\",\"parent\":\"b86543129233e8a78c321a3ebb5ee76f59cae114d86d3f095cb356633b9977b7\",\"created\":\"2016-04-12T17:07:50.921168293Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"b86543129233e8a78c321a3ebb5ee76f59cae114d86d3f095cb356633b9977b7\",\"parent\":\"cae9366d39fd8d1a8333a611bb771c40953f27d3fe20dcf9f857176f756e3431\",\"created\":\"2016-04-12T17:07:49.253478419Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) COPY file:dd30e00c364f2dade004582128b8bf7cc31131361dd0fec721c2624b0d40d3c3 in /usr/local/bin/\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"cae9366d39fd8d1a8333a611bb771c40953f27d3fe20dcf9f857176f756e3431\",\"parent\":\"bbb6b60c4cce5c5ae9d2a249442e2536c6c18c031ca6d49ee8529d3753ac1b6c\",\"created\":\"2016-04-12T17:07:48.635146439Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) VOLUME [/var/lib/mysql]\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"bbb6b60c4cce5c5ae9d2a249442e2536c6c18c031ca6d49ee8529d3753ac1b6c\",\"parent\":\"22eaf0feb6a6f124be2bf7d4d8ef72e5b44d18db4b435bf5e854412d1c5fe1cd\",\"created\":\"2016-04-12T17:07:48.045213265Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c mkdir -p /etc/mysql/conf.d \\t\\u0026\\u0026 { \\t\\techo '[mysqld]'; \\t\\techo 'skip-host-cache'; \\t\\techo 'skip-name-resolve'; \\t\\techo 'user = mysql'; \\t\\techo 'datadir = /var/lib/mysql'; \\t\\techo '!includedir /etc/mysql/conf.d/'; \\t} \\u003e /etc/mysql/my.cnf\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"22eaf0feb6a6f124be2bf7d4d8ef72e5b44d18db4b435bf5e854412d1c5fe1cd\",\"parent\":\"5d1bdfa24055ff7f578d723b1dc8e2a980dba0bf6a816b1aba6fe6d5daa3ae16\",\"created\":\"2016-04-12T17:07:46.539180291Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/mysql/bin:/usr/local/mysql/scripts\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"5d1bdfa24055ff7f578d723b1dc8e2a980dba0bf6a816b1aba6fe6d5daa3ae16\",\"parent\":\"fe89f98f69aaacca82ca2743e9bbff58c29ef6f414f760af5edaa0142183a4ff\",\"created\":\"2016-04-12T17:07:45.313224383Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c apt-get update \\u0026\\u0026 apt-get install -y curl --no-install-recommends \\u0026\\u0026 rm -rf /var/lib/apt/lists/* \\t\\u0026\\u0026 curl -SL \\\"http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz\\\" -o mysql.tar.gz \\t\\u0026\\u0026 curl -SL \\\"http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux2.6-x86_64.tar.gz.asc\\\" -o mysql.tar.gz.asc \\t\\u0026\\u0026 apt-get purge -y --auto-remove curl \\t\\u0026\\u0026 export GNUPGHOME=\\\"$(mktemp -d)\\\" \\t\\u0026\\u0026 gpg --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5 \\t\\u0026\\u0026 gpg --batch --verify mysql.tar.gz.asc mysql.tar.gz \\t\\u0026\\u0026 rm -r \\\"$GNUPGHOME\\\" mysql.tar.gz.asc \\t\\u0026\\u0026 mkdir /usr/local/mysql \\t\\u0026\\u0026 tar -xzf mysql.tar.gz -C /usr/local/mysql --strip-components=1 \\t\\u0026\\u0026 rm mysql.tar.gz \\t\\u0026\\u0026 rm -rf /usr/local/mysql/mysql-test /usr/local/mysql/sql-bench \\t\\u0026\\u0026 rm -rf /usr/local/mysql/bin/*-debug /usr/local/mysql/bin/*_embedded \\t\\u0026\\u0026 find /usr/local/mysql -type f -name \\\"*.a\\\" -delete \\t\\u0026\\u0026 apt-get update \\u0026\\u0026 apt-get install -y binutils \\u0026\\u0026 rm -rf /var/lib/apt/lists/* \\t\\u0026\\u0026 { find /usr/local/mysql -type f -executable -exec strip --strip-all '{}' + || true; } \\t\\u0026\\u0026 apt-get purge -y --auto-remove binutils\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"fe89f98f69aaacca82ca2743e9bbff58c29ef6f414f760af5edaa0142183a4ff\",\"parent\":\"d81093dfc1b04e820fcd233de16be27a71d1f2597c4b96a82d66e046032ff873\",\"created\":\"2016-04-12T17:04:36.739210578Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) ENV MYSQL_VERSION=5.5.49\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"d81093dfc1b04e820fcd233de16be27a71d1f2597c4b96a82d66e046032ff873\",\"parent\":\"f92e5f94d696e7e16de8cf693e8a91ffb97d8262f73e3ef6c6bcef031a068c04\",\"created\":\"2016-04-05T00:07:31.594979304Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) ENV MYSQL_MAJOR=5.5\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"f92e5f94d696e7e16de8cf693e8a91ffb97d8262f73e3ef6c6bcef031a068c04\",\"parent\":\"dccd7c685e905575e7bf5eb35baf59a035e422c8af109f73270be5a0d5864711\",\"created\":\"2016-04-05T00:07:31.005254165Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c apt-get update \\u0026\\u0026 apt-get install -y libaio1 pwgen \\u0026\\u0026 rm -rf /var/lib/apt/lists/*\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"dccd7c685e905575e7bf5eb35baf59a035e422c8af109f73270be5a0d5864711\",\"parent\":\"efec941cd323c5ce4d487dcde33804895e513f57013ccbe4677fa31d1d3caa6c\",\"created\":\"2016-04-05T00:06:54.905147242Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c apt-get update \\u0026\\u0026 apt-get install -y perl --no-install-recommends \\u0026\\u0026 rm -rf /var/lib/apt/lists/*\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"efec941cd323c5ce4d487dcde33804895e513f57013ccbe4677fa31d1d3caa6c\",\"parent\":\"696a60249aaca49539c17a1bacbdabab7b489e148ad1e7f160cc56b400defe5b\",\"created\":\"2016-04-05T00:06:20.201214333Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c mkdir /docker-entrypoint-initdb.d\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"696a60249aaca49539c17a1bacbdabab7b489e148ad1e7f160cc56b400defe5b\",\"parent\":\"91a0e4c512458ba0e1b946dcf6035c5e51e7c916a59765672d8f9eb7229229d0\",\"created\":\"2016-04-04T23:48:18.9372321Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c groupadd -r mysql \\u0026\\u0026 useradd -r -g mysql mysql\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"91a0e4c512458ba0e1b946dcf6035c5e51e7c916a59765672d8f9eb7229229d0\",\"parent\":\"0e0f419fdc2099b403f4e534ca3e65c6ef8608b2692f84f20b8befd38438dff2\",\"created\":\"2016-04-04T22:02:03.339070218Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) CMD [\\\"/bin/bash\\\"]\"]}}"
+      },
+      {
+         "v1Compatibility": "{\"id\":\"0e0f419fdc2099b403f4e534ca3e65c6ef8608b2692f84f20b8befd38438dff2\",\"created\":\"2016-04-04T22:02:00.299390979Z\",\"container_config\":{\"Cmd\":[\"/bin/sh -c #(nop) ADD file:2ed80fd333c2052addd160264a94c0e3c469f808f54b58f84c4041742424e0a7 in /\"]}}"
+      }
+   ],
+   "signatures": [
+      {
+         "header": {
+            "jwk": {
+               "crv": "P-256",
+               "kid": "RV57:7WX3:3WCV:JXHV:R45J:7LCG:J5Y2:FQ4X:VDDT:NYNB:BNYS:BLEM",
+               "kty": "EC",
+               "x": "XmDMFd1p-wo2DRBYwDPlAmmJXQe-lKKGUeUQYekK9QI",
+               "y": "xh5bBK4V0bwccdFNra6rtgjEodg-ke250w4Nz96X0g8"
+            },
+            "alg": "ES256"
+         },
+         "signature": "bNhysshQQxV96Tb598qpzlJaffeabsEHD84MAuwTxqh1gMsFbyJZIIWFF7JFS2kJpFsACKdIqRZ8OCW_q3SkAA",
+         "protected": "eyJmb3JtYXRMZW5ndGgiOjExMDkxLCJmb3JtYXRUYWlsIjoiQ24wIiwidGltZSI6IjIwMTYtMDYtMjNUMDM6MjY6NDJaIn0"
+      }
+   ]
+}

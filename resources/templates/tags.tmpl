@@ -1,0 +1,32 @@
+{{define "tags"}}
+<!doctype html>
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="/assets/css/table.css">
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Tag({{len .tags}})</th>
+                    <th>CreatedTime</th>
+                    <th>DigestV2</th>
+                    <th>Size</th>
+                    <th>Layers</th>
+                    <th>Delete</th>
+                </tr>
+                {{range .tags}}
+                <tr>
+                    <td><a href="/detail/{{urlquery .Name | urlquery}}/{{.Tag}}">{{.Tag}}</td>
+                    <td>{{.CreatedTime}}</td>
+                    <td>{{.DigestV2}}</td>
+                    <td>{{.HumanSize}}</td>
+                    <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</td>
+                    <td><a href="/delete/{{urlquery .Name | urlquery}}/{{.Tag}}">Delete</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </body>
+</html>
+{{end}}

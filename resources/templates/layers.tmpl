@@ -1,0 +1,26 @@
+{{define "layers"}}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/assets/css/table.css">
+    </head>
+    <body>
+        <table>
+            <tbody>
+                <tr>
+                    <th>CreatedTime</th>
+                    <th>Size</th>
+                    <th>Cmd</th>
+                </tr>
+                {{range .layers}}
+                <tr>
+                    <td>{{.CreatedTime}}</td>
+                    <td>{{.HumanSize}}</td>
+                    <td>{{.Cmd}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </body>
+</html>
+{{end}}

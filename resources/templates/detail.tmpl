@@ -1,0 +1,73 @@
+{{define "detail"}}
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/assets/css/table.css">
+    </head>
+    <body>
+        <table>
+            <tbody>
+                {{with .info}}
+                    <tr>
+                        <th scope="row">Name</th>
+                        <td>{{.Name}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tag</th>
+                        <td>{{.Tag}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">DockerVersion</th>
+                        <td>{{.DockerVersion}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">CreatedTime</th>
+                        <td>{{.CreatedTime}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">DigestV2</th>
+                        <td>{{.DigestV2}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ExposedPorts</th>
+                        <td>
+                            {{- range $index, $element := .ExposedPorts -}}
+                                {{- if $index}}, {{end -}}
+                                {{- $element -}}
+                            {{- end -}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Envs</th>
+                        <td>{{range .Envs}}{{.}}<br/>{{end}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cmd</th>
+                        <td>{{.Cmd}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Volumes</th>
+                        <td>{{range .Volumes}}{{.}}<br/>{{end}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">WorkingDir</th>
+                        <td>{{.WorkingDir}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Entrypoint</th>
+                        <td>{{.Entrypoint}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Size</th>
+                        <td>{{.HumanSize}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Layers</th>
+                        <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</td>
+                    </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </body>
+</html>
+{{end}}
