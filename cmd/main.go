@@ -4,7 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"git.oschina.net/mkdym/docker-registry-viewer/client"
+	"github.com/mkdym/docker-registry-viewer/client"
 	"sort"
 	"strings"
 )

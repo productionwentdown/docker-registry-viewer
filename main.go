@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"git.oschina.net/mkdym/docker-registry-viewer/client"
 	"github.com/gin-gonic/gin"
+	"github.com/mkdym/docker-registry-viewer/client"
 	"net/http"
 	"net/url"
 	"os"
