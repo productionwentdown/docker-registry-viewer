@@ -10,6 +10,7 @@ COMMAND_GET_GOPM="gopm get -v -g github.com/gin-gonic/gin"
 COMMAND_BUILD="go build -o /docker-bin/docker-registry-viewer github.com/mkdym/docker-registry-viewer"
 
 COMMAND="${COMMAND_GET} && ${COMMAND_BUILD}"
+COMMAND_STATIC="export CGO_ENABLED=0 && ${COMMAND}"
 
 
 sudo rm -rf /tmp/docker-registry-viewer/docker-bin
