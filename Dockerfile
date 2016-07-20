@@ -3,7 +3,7 @@ FROM alpine:3.3
 MAINTAINER juxiaoheng "juxiaoheng@wps.cn"
 
 
-COPY ./bin /docker-bin/
+COPY ./docker-bin /docker-bin/
 COPY ./resources /docker-bin/resources/
 
 EXPOSE 49110
