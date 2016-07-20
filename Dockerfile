@@ -4,7 +4,7 @@ MAINTAINER juxiaoheng "juxiaoheng@wps.cn"
 
 
 COPY ./bin /docker-bin/
-COPY ./resources /docker-bin/
+COPY ./resources /docker-bin/resources/
 
 EXPOSE 49110
 
