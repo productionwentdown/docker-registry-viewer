@@ -25,7 +25,7 @@ export LISTEN_PORT=49110
 ```
 # need sudo
 # see script for image name
-./build.sh
+./docker-build.sh
 ```
 
 
