@@ -17,6 +17,7 @@ export REGISTRY_HOST=127.0.0.1
 export REGISTRY_PORT=5000
 export REGISTRY_SSL=off
 export LISTEN_PORT=49110
+# need folder: resources
 /path/to/docker-registry-viewer
 ```
 
