@@ -29,8 +29,6 @@ export LISTEN_PORT=49110
 ./docker-build.sh
 ```
 
-
-
 ### docker-usage
 
 ```
@@ -43,6 +41,6 @@ docker run -d --restart=always \
 	mkdym/docker-registry-viewer:<tag>
 ```
 
+### cmd-tool
 
-
-
+also provide a cmd tool, run `cmd-build.sh` to build
