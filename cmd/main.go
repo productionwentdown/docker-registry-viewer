@@ -40,7 +40,7 @@ func HandleFlag() {
 		list_all: list all repo and its tags
 		delete: delete image tag. need name and tag
 		get_info: get image info, need name and tag`)
-	flag.StringVar(&g_config.host, "host", "", "specify registry host, eg, https://ep.wps.kingsoft.net:5000, 127.0.0.1:5000. if ssl on, must add 'https://'")
+	flag.StringVar(&g_config.host, "host", "", "specify registry host, eg, https://example.com:5000, 127.0.0.1:5000. if ssl on, must add 'https://'")
 	flag.StringVar(&g_config.name, "name", "", "specify image name")
 	flag.StringVar(&g_config.tag, "tag", "", "sepcify image tag")
 	flag.BoolVar(&g_config.sort, "sort", false, "sort output")
