@@ -21,4 +21,4 @@ docker run -ti --rm \
 sudo rm -rf ./docker-bin
 sudo mv /tmp/docker-registry-viewer/docker-bin/ ./docker-bin
 
-docker build -t mkdym/docker-registry-viewer:v1.0 .
+docker build -t mkdym/docker-registry-viewer:v1.1 .

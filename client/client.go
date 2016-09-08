@@ -1,3 +1,4 @@
+// Reference: https://docs.docker.com/registry/spec/api/
 package client
 
 import (
@@ -15,13 +16,15 @@ var (
 )
 
 type RegistryClient struct {
-	host       string
-	httpClient *http.Client
+	host        string
+	httpClient  *http.Client
+	blobSizeMap map[string]uint64
 }
 
 type registryResp struct {
 	StatusCode    int
 	StatusString  string
+	Link          string
 	Digest        string
 	ContentLength uint64
 	Body          string
@@ -63,7 +66,9 @@ func NewRegistryClient(protocol string, host string) (*RegistryClient, error) {
 		httpClient = &http.Client{Transport: tr}
 	}
 
-	return &RegistryClient{host: protocol + "://" + strings.Trim(host, "/\\"), httpClient: httpClient}, nil
+	return &RegistryClient{host: protocol + "://" + strings.Trim(host, "/\\"),
+		httpClient:  httpClient,
+		blobSizeMap: make(map[string]uint64)}, nil
 }
 
 func (c *RegistryClient) doRequest(method string, path string, headers map[string]string) (*registryResp, error) {
@@ -93,6 +98,7 @@ func (c *RegistryClient) doRequest(method string, path string, headers map[strin
 
 	return &registryResp{StatusCode: httpResp.StatusCode,
 		StatusString:  httpResp.Status,
+		Link:          httpResp.Header.Get("Link"),
 		Digest:        httpResp.Header.Get("Docker-Content-Digest"),
 		ContentLength: bodyLenth,
 		Body:          string(body)}, nil
@@ -179,21 +185,52 @@ func (c *RegistryClient) GetManifestV2(name string, reference string) (*Manifest
 }
 
 func (c *RegistryClient) GetCatalog() ([]string, error) {
-	r, err := c.doRequest(http.MethodGet, "_catalog", nil)
-	if err != nil {
-		return nil, err
+	getLastRepoFromLink := func(link string) string {
+		// Link: </v2/_catalog?last=rtd&n=100>; rel="next"
+		for _, part := range strings.Split(link, ";") {
+			if strings.HasPrefix(part, "</v2/_catalog?") {
+				for _, param := range strings.Split(strings.Split(strings.TrimRight(part, ">"), "?")[1], "&") {
+					if strings.HasPrefix(param, "last=") {
+						return strings.Split(param, "=")[1]
+					}
+				}
+			}
+		}
+
+		return ""
 	}
 
-	if r.StatusCode != 200 {
-		return nil, errors.New(r.StatusString)
+	repos := make([]string, 0, 100)
+	lastRepo := ""
+	for {
+		path := "_catalog?n=100"
+		if lastRepo != "" {
+			path += "&last=" + lastRepo
+		}
+
+		r, err := c.doRequest(http.MethodGet, path, nil)
+		if err != nil {
+			return nil, err
+		}
+
+		if r.StatusCode != 200 {
+			return nil, errors.New(r.StatusString)
+		}
+
+		var catalog CatalogResp
+		if err := json.Unmarshal([]byte(r.Body), &catalog); err != nil {
+			return nil, errors.New("can not Unmarshal string\n\n" + r.Body + "\n\nerror: " + err.Error())
+		}
+
+		repos = append(repos, catalog.Repositories...)
+
+		lastRepo = getLastRepoFromLink(r.Link)
+		if lastRepo == "" {
+			break
+		}
 	}
 
-	var catalog CatalogResp
-	if err := json.Unmarshal([]byte(r.Body), &catalog); err != nil {
-		return nil, errors.New("can not Unmarshal string\n\n" + r.Body + "\n\nerror: " + err.Error())
-	}
-
-	return catalog.Repositories, nil
+	return repos, nil
 }
 
 func (c *RegistryClient) deleteByDigest(name string, digest string) error {
@@ -225,6 +262,10 @@ func (c *RegistryClient) DeleteTag(name string, tag string) error {
 }
 
 func (c *RegistryClient) getBlobSize(name string, digest string) (uint64, error) {
+	if size, ok := c.blobSizeMap[digest]; ok {
+		return size, nil
+	}
+
 	r, err := c.doRequest(http.MethodHead, name+"/blobs/"+digest, nil)
 	if err != nil {
 		return 0, err
@@ -238,6 +279,7 @@ func (c *RegistryClient) getBlobSize(name string, digest string) (uint64, error)
 		return 0, errors.New(r.StatusString)
 	}
 
+	c.blobSizeMap[digest] = r.ContentLength
 	return r.ContentLength, nil
 }
 
