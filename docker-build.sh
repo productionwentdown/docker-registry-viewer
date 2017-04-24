@@ -5,11 +5,7 @@ set -e
 cd `dirname $0`
 
 
-COMMAND_GET="go get -v github.com/gin-gonic/gin"
-COMMAND_GET_GOPM="gopm get -v -g github.com/gin-gonic/gin"
-COMMAND_BUILD="go build -o /docker-bin/docker-registry-viewer github.com/mkdym/docker-registry-viewer"
-
-COMMAND="export CGO_ENABLED=0 && ${COMMAND_GET} && ${COMMAND_BUILD}"
+COMMAND="export CGO_ENABLED=0 && go build -o /docker-bin/docker-registry-viewer github.com/mkdym/docker-registry-viewer"
 
 
 sudo rm -rf /tmp/docker-registry-viewer/docker-bin

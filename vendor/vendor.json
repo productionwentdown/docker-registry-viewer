@@ -1,0 +1,55 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "1AJ0cJ3Kez7YV7pm2dEm461woec=",
+			"path": "github.com/gin-gonic/gin",
+			"revision": "df2e95cc7886de3b9d7839a152cc39cea5732060",
+			"revisionTime": "2016-12-27T11:26:54Z"
+		},
+		{
+			"checksumSHA1": "UsILDoIB2S7ra+w2fMdb85mX3HM=",
+			"path": "github.com/gin-gonic/gin/binding",
+			"revision": "df2e95cc7886de3b9d7839a152cc39cea5732060",
+			"revisionTime": "2016-12-27T11:26:54Z"
+		},
+		{
+			"checksumSHA1": "SrzCUmvv4Jj/rKvb0ue7+wMlSLk=",
+			"path": "github.com/gin-gonic/gin/render",
+			"revision": "df2e95cc7886de3b9d7839a152cc39cea5732060",
+			"revisionTime": "2016-12-27T11:26:54Z"
+		},
+		{
+			"checksumSHA1": "s2E4fYDL3LeDZAnuN4+WNNsQxxk=",
+			"path": "github.com/golang/protobuf/proto",
+			"revision": "b9504f23731d0b61ccfff7370a161d6c857ca00d",
+			"revisionTime": "2016-03-09T00:48:00Z"
+		},
+		{
+			"checksumSHA1": "b0T0Hzd+zYk+OCDTFMps+jwa/nY=",
+			"path": "github.com/manucorporat/sse",
+			"revision": "ee05b128a739a0fb76c7ebd3ae4810c1de808d6d",
+			"revisionTime": "2016-01-26T18:01:36Z"
+		},
+		{
+			"checksumSHA1": "xZuhljnmBysJPta/lMyYmJdujCg=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "30a891c33c7cde7b02a981314b4228ec99380cca",
+			"revisionTime": "2016-11-23T14:36:37Z"
+		},
+		{
+			"checksumSHA1": "9+TP2NPlTWXoRndq02uwZW26AqI=",
+			"path": "gopkg.in/go-playground/validator.v8",
+			"revision": "014792cf3e266caff1e916876be12282b33059e0",
+			"revisionTime": "2016-02-23T20:26:51Z"
+		},
+		{
+			"checksumSHA1": "12GqsW8PiRPnezDDy0v4brZrndM=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a5b47d31c556af34a302ce5d659e6fea44d90de0",
+			"revisionTime": "2016-09-28T15:37:09Z"
+		}
+	],
+	"rootPath": "github.com/mkdym/docker-registry-viewer"
+}
