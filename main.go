@@ -2,50 +2,51 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/mkdym/docker-registry-viewer/client"
 	"net/http"
 	"net/url"
 	"os"
 	"sort"
+
+	"github.com/gin-gonic/gin"
+	"github.com/mkdym/docker-registry-viewer/client"
 )
 
 var (
-	g_client *client.RegistryClient
+	gClient *client.RegistryClient
 )
 
 func main() {
-	listen_port := os.Getenv("LISTEN_PORT")
-	if listen_port == "" {
+	listenPort := os.Getenv("LISTEN_PORT")
+	if listenPort == "" {
 		fmt.Println("default listen_port 49110, specify env LISTEN_PORT to change it")
-		listen_port = "49110"
+		listenPort = "49110"
 	}
 
-	registry_host := os.Getenv("REGISTRY_HOST")
-	if registry_host == "" {
+	registryHost := os.Getenv("REGISTRY_HOST")
+	if registryHost == "" {
 		panic("empty registry_host, specify env REGISTRY_HOST")
 	}
 
-	registry_port := os.Getenv("REGISTRY_PORT")
-	if registry_port == "" {
+	registryPort := os.Getenv("REGISTRY_PORT")
+	if registryPort == "" {
 		fmt.Println("default registry_port 5000, specify env REGISTRY_PORT to change it")
-		registry_port = "5000"
+		registryPort = "5000"
 	}
 
-	registry_protocol := "http"
+	registryProtocol := "http"
 	if ssl := os.Getenv("REGISTRY_SSL"); ssl == "on" {
 		fmt.Println("registry ssl on")
-		registry_protocol = "https"
+		registryProtocol = "https"
 	}
 
-	registry_client, err := client.NewRegistryClient(registry_protocol, fmt.Sprintf("%s:%s", registry_host, registry_port))
+	registryClient, err := client.NewRegistryClient(registryProtocol, fmt.Sprintf("%s:%s", registryHost, registryPort))
 	if err != nil {
 		panic(err)
 	}
-	if err := registry_client.Ping(); err != nil {
+	if err := registryClient.Ping(); err != nil {
 		panic(err)
 	}
-	g_client = registry_client
+	gClient = registryClient
 
 	r := gin.Default()
 	r.Static("/assets", "./resources/assets")
@@ -58,7 +59,7 @@ func main() {
 	r.GET("/layers/:repo/:tag", handleGetLayers)
 	r.GET("delete/:repo/:tag", handleDeleteImage)
 
-	r.Run(":" + listen_port)
+	r.Run(":" + listenPort)
 }
 
 type RepoCountPair struct {
@@ -67,7 +68,7 @@ type RepoCountPair struct {
 }
 
 func handleGetRepos(c *gin.Context) {
-	catalog, err := g_client.GetCatalog()
+	catalog, err := gClient.GetCatalog()
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
@@ -76,7 +77,7 @@ func handleGetRepos(c *gin.Context) {
 
 	repos := make([]RepoCountPair, 0, len(catalog))
 	for _, name := range catalog {
-		if tags, err := g_client.GetTags(name); err == nil {
+		if tags, err := gClient.GetTags(name); err == nil {
 			if len(tags) == 0 {
 				fmt.Fprintln(os.Stderr, fmt.Sprintf("get tag of [%s] success, but Zero image", name))
 			} else {
@@ -113,7 +114,7 @@ func handleGetTags(c *gin.Context) {
 
 	//fmt.Println("repo:", repo)
 
-	tags, err := g_client.GetTags(repo)
+	tags, err := gClient.GetTags(repo)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
@@ -121,7 +122,7 @@ func handleGetTags(c *gin.Context) {
 
 	tagsInfo := make([]*client.ImageInfo, 0, len(tags))
 	for _, tag := range tags {
-		if info, err := g_client.GetImageInfo(repo, tag); err == nil {
+		if info, err := gClient.GetImageInfo(repo, tag); err == nil {
 			tagsInfo = append(tagsInfo, info)
 		} else {
 			fmt.Fprintln(os.Stderr, fmt.Sprintf("get [%s:%s] image info fail, error: %s", repo, tag, err.Error()))
@@ -148,7 +149,7 @@ func handleGetDetail(c *gin.Context) {
 
 	//fmt.Println("repo:", repo, ",tag:", tag)
 
-	info, err := g_client.GetImageInfo(repo, tag)
+	info, err := gClient.GetImageInfo(repo, tag)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
@@ -172,7 +173,7 @@ func handleGetLayers(c *gin.Context) {
 
 	//fmt.Println("repo:", repo, ",tag:", tag)
 
-	info, err := g_client.GetImageInfo(repo, tag)
+	info, err := gClient.GetImageInfo(repo, tag)
 	if err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
@@ -196,7 +197,7 @@ func handleDeleteImage(c *gin.Context) {
 
 	//fmt.Println("repo:", repo, ",tag:", tag)
 
-	if err := g_client.DeleteTag(repo, tag); err != nil {
+	if err := gClient.DeleteTag(repo, tag); err != nil {
 		c.String(http.StatusInternalServerError, "%s", err.Error())
 		return
 	}

@@ -1,0 +1,97 @@
+{{define "detail"}}
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Detail</title>
+
+        <!-- Bootstrap -->
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="/assets/js/html5shiv.min.js"></script>
+            <script src="/assets/js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                        <tbody>
+                            {{with .info}}
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td>{{.Name}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Tag</th>
+                                    <td>{{.Tag}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DockerVersion</th>
+                                    <td>{{.DockerVersion}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">CreatedTime</th>
+                                    <td>{{.CreatedTime}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DigestV2</th>
+                                    <td>{{.DigestV2}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ExposedPorts</th>
+                                    <td>
+                                        {{- range $index, $element := .ExposedPorts -}}
+                                            {{- if $index}}, {{end -}}
+                                            {{- $element -}}
+                                        {{- end -}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Envs</th>
+                                    <td>{{range .Envs}}{{.}}<br/>{{end}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Cmd</th>
+                                    <td>{{.Cmd}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Volumes</th>
+                                    <td>{{range .Volumes}}{{.}}<br/>{{end}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">WorkingDir</th>
+                                    <td>{{.WorkingDir}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Entrypoint</th>
+                                    <td>{{.Entrypoint}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Size</th>
+                                    <td>{{.HumanSize}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Layers</th>
+                                    <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="/assets/js/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="/assets/js/bootstrap.min.js"></script>
+    </body>
+</html>
+{{end}}

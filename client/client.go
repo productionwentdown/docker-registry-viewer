@@ -73,11 +73,14 @@ func NewRegistryClient(protocol string, host string) (*RegistryClient, error) {
 
 func (c *RegistryClient) doRequest(method string, path string, headers map[string]string) (*registryResp, error) {
 	req, err := http.NewRequest(method, c.host+"/v2/"+strings.Trim(path, "/\\"), nil)
+	if err != nil {
+		return nil, err
+	}
+	// http://craigwickesser.com/2015/01/golang-http-to-many-open-files/
+	req.Close = true
 
-	if headers != nil {
-		for k, v := range headers {
-			req.Header.Add(k, v)
-		}
+	for k, v := range headers {
+		req.Header.Add(k, v)
 	}
 
 	httpResp, err := c.httpClient.Do(req)
@@ -284,22 +287,22 @@ func (c *RegistryClient) getBlobSize(name string, digest string) (uint64, error)
 }
 
 func (c *RegistryClient) GetImageInfo(name string, tag string) (*ImageInfo, error) {
-	m_v1, err := c.GetManifestV1(name, tag)
+	mV1, err := c.GetManifestV1(name, tag)
 	if err != nil {
 		return nil, errors.New("can not get image[" + name + ":" + tag + "] manifest(V1), error: " + err.Error())
 	}
 
-	if len(m_v1.FSLayers) == 0 || len(m_v1.Historys) == 0 || len(m_v1.FSLayers) != len(m_v1.Historys) {
+	if len(mV1.FSLayers) == 0 || len(mV1.Historys) == 0 || len(mV1.FSLayers) != len(mV1.Historys) {
 		return nil, errors.New("invalid manifest(V1), empty layers or history or not equal numbers")
 	}
 
-	m_v2, err := c.GetManifestV2(name, tag)
+	mV2, err := c.GetManifestV2(name, tag)
 	if err != nil {
 		return nil, errors.New("can not get image[" + name + ":" + tag + "] manifest(V2), error: " + err.Error())
 	}
 
 	/*
-		if len(m_v2.Layers) != len(m_v1.FSLayers) {
+		if len(mV2.Layers) != len(mV1.FSLayers) {
 			return nil, errors.New("invalid manifest(V2), layers number of v1 and v2 not equal")
 		}
 	*/
@@ -307,35 +310,35 @@ func (c *RegistryClient) GetImageInfo(name string, tag string) (*ImageInfo, erro
 	var info ImageInfo
 	info.Name = name
 	info.Tag = tag
-	info.DockerVersion = m_v1.Historys[0].V1Compatibility.DockerVersion
-	info.CreatedTime = m_v1.Historys[0].V1Compatibility.CreatedTime
-	info.DigestV1 = m_v1.Digest
-	info.DigestV2 = m_v2.Digest
+	info.DockerVersion = mV1.Historys[0].V1Compatibility.DockerVersion
+	info.CreatedTime = mV1.Historys[0].V1Compatibility.CreatedTime
+	info.DigestV1 = mV1.Digest
+	info.DigestV2 = mV2.Digest
 
-	for k, _ := range m_v1.Historys[0].V1Compatibility.Config.ExposedPorts {
+	for k, _ := range mV1.Historys[0].V1Compatibility.Config.ExposedPorts {
 		info.ExposedPorts = append(info.ExposedPorts, k)
 	}
 
-	info.Envs = m_v1.Historys[0].V1Compatibility.Config.Envs
-	info.Cmd = strings.Join(m_v1.Historys[0].V1Compatibility.Config.Cmds, ", ")
+	info.Envs = mV1.Historys[0].V1Compatibility.Config.Envs
+	info.Cmd = strings.Join(mV1.Historys[0].V1Compatibility.Config.Cmds, ", ")
 
-	for k, _ := range m_v1.Historys[0].V1Compatibility.Config.Volumes {
+	for k, _ := range mV1.Historys[0].V1Compatibility.Config.Volumes {
 		info.Volumes = append(info.Volumes, k)
 	}
 
-	info.WorkingDir = m_v1.Historys[0].V1Compatibility.Config.WorkingDir
-	info.Entrypoint = strings.Join(m_v1.Historys[0].V1Compatibility.Config.Entrypoint, ", ")
+	info.WorkingDir = mV1.Historys[0].V1Compatibility.Config.WorkingDir
+	info.Entrypoint = strings.Join(mV1.Historys[0].V1Compatibility.Config.Entrypoint, ", ")
 
-	//m_v1.FSLayers 是有顺序的，时间倒序
-	for index, _ := range m_v1.FSLayers {
+	//mV1.FSLayers 是有顺序的，时间倒序
+	for index, _ := range mV1.FSLayers {
 		var layer ImageLayer
-		layer.BlobSum = m_v1.FSLayers[index].BlobSum
-		layer.CreatedTime = m_v1.Historys[index].V1Compatibility.CreatedTime
-		layer.Cmd = strings.Join(m_v1.Historys[index].V1Compatibility.ContainerConfig.Cmds, ", ")
+		layer.BlobSum = mV1.FSLayers[index].BlobSum
+		layer.CreatedTime = mV1.Historys[index].V1Compatibility.CreatedTime
+		layer.Cmd = strings.Join(mV1.Historys[index].V1Compatibility.ContainerConfig.Cmds, ", ")
 
 		//v1中的blobsum在v2中不一定有，所以还是取v1中blob的length
 		/*
-			for _, v2layer := range m_v2.Layers {
+			for _, v2layer := range mV2.Layers {
 				if v2layer.Digest == layer.BlobSum {
 					layer.Size = v2layer.Size
 					layer.HumanSize = humanSize(layer.Size)
