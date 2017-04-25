@@ -21,6 +21,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/tags/{{.repo}}">{{.repo}}</a></li>
+                        <li><a href="/detail/{{.repo}}/{{.tag}}">{{.tag}}</a></li>
+                        <li><a href="/layers/{{.repo}}/{{.tag}}">layers</a></li>
+                    </ol>
+                    <div class="page-header">
+                        <h2>Layers</h2>
+                    </div>
+                    <dl>
+                        <dt>Image</dt>
+                        <dd>{{.registry}}/{{.repo}}:{{.tag}}</dd>
+                    </dl>
                     <table class="table table-bordered table-hover">
                         <tbody>
                             <tr>

@@ -12,7 +12,8 @@ import (
 )
 
 var (
-	gClient *client.RegistryClient
+	gClient   *client.RegistryClient
+	gRegistry string
 )
 
 func main() {
@@ -39,7 +40,8 @@ func main() {
 		registryProtocol = "https"
 	}
 
-	registryClient, err := client.NewRegistryClient(registryProtocol, fmt.Sprintf("%s:%s", registryHost, registryPort))
+	gRegistry = fmt.Sprintf("%s:%s", registryHost, registryPort)
+	registryClient, err := client.NewRegistryClient(registryProtocol, gRegistry)
 	if err != nil {
 		panic(err)
 	}
@@ -88,7 +90,7 @@ func handleGetRepos(c *gin.Context) {
 		}
 	}
 
-	c.HTML(http.StatusOK, "repos", gin.H{"repos": repos})
+	c.HTML(http.StatusOK, "repos", gin.H{"registry": gRegistry, "repos": repos})
 }
 
 type TimeSorterOfImageInfos []*client.ImageInfo
@@ -131,7 +133,7 @@ func handleGetTags(c *gin.Context) {
 	}
 
 	sort.Sort(sort.Reverse(TimeSorterOfImageInfos(tagsInfo)))
-	c.HTML(http.StatusOK, "tags", gin.H{"tags": tagsInfo})
+	c.HTML(http.StatusOK, "tags", gin.H{"registry": gRegistry, "repo": repo, "tags": tagsInfo})
 }
 
 func handleGetDetail(c *gin.Context) {
@@ -155,7 +157,7 @@ func handleGetDetail(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "detail", gin.H{"info": info})
+	c.HTML(http.StatusOK, "detail", gin.H{"registry": gRegistry, "repo": repo, "tag": tag, "info": info})
 }
 
 func handleGetLayers(c *gin.Context) {
@@ -179,7 +181,7 @@ func handleGetLayers(c *gin.Context) {
 		return
 	}
 
-	c.HTML(http.StatusOK, "layers", gin.H{"layers": info.Layers})
+	c.HTML(http.StatusOK, "layers", gin.H{"registry": gRegistry, "repo": repo, "tag": tag, "layers": info.Layers})
 }
 
 func handleDeleteImage(c *gin.Context) {

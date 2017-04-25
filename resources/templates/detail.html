@@ -21,6 +21,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/tags/{{.repo}}">{{.repo}}</a></li>
+                        <li class="active"><a href="/detail/{{.repo}}/{{.tag}}">{{.tag}}</a></li>
+                    </ol>
+                    <div class="page-header">
+                        <h2>Detail</h2>
+                    </div>
+                    <dl>
+                        <dt>Image</dt>
+                        <dd>{{.registry}}/{{.repo}}:{{.tag}}</dd>
+                    </dl>
                     <table class="table table-bordered table-hover">
                         <tbody>
                             {{with .info}}
@@ -79,7 +91,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Layers</th>
-                                    <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</td>
+                                    <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</a></td>
                                 </tr>
                             {{end}}
                         </tbody>

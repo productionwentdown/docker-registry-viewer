@@ -22,6 +22,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="active"><a href="/">Home</a></li>
+                    </ol>
+                    <div class="page-header">
+                        <h2>Repos</h2>
+                    </div>
+                    <dl>
+                        <dt>Registry</dt>
+                        <dd>{{.registry}}</dd>
+                    </dl>
                     <table class="table table-bordered table-hover">
                         <tbody>
                             <tr>
@@ -30,7 +40,7 @@
                             </tr>
                             {{range .repos}}
                             <tr>
-                                <td><a href="/tags/{{urlquery .Repo | urlquery}}">{{.Repo}}</td>
+                                <td><a href="/tags/{{urlquery .Repo | urlquery}}">{{.Repo}}</a></td>
                                 <td>{{.Count}}</td>
                             </tr>
                             {{end}}

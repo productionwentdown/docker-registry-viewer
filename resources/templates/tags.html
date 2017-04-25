@@ -22,6 +22,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/tags/{{.repo}}">{{.repo}}</a></li>
+                    </ol>
+                    <div class="page-header">
+                        <h2>Tags</h2>
+                    </div>
+                    <dl>
+                        <dt>Image</dt>
+                        <dd>{{.registry}}/{{.repo}}</dd>
+                    </dl>
                     <table class="table table-bordered table-hover">
                         <tbody>
                             <tr>
@@ -34,12 +45,12 @@
                             </tr>
                             {{range .tags}}
                             <tr>
-                                <td><a href="/detail/{{urlquery .Name | urlquery}}/{{.Tag}}">{{.Tag}}</td>
+                                <td><a href="/detail/{{urlquery .Name | urlquery}}/{{.Tag}}">{{.Tag}}</a></td>
                                 <td>{{.CreatedTime}}</td>
                                 <td>{{.DigestV2}}</td>
                                 <td>{{.HumanSize}}</td>
-                                <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</td>
-                                <td><a href="/delete/{{urlquery .Name | urlquery}}/{{.Tag}}">Delete</td>
+                                <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</a></td>
+                                <td><a href="/delete/{{urlquery .Name | urlquery}}/{{.Tag}}">Delete</a></td>
                             </tr>
                             {{end}}
                         </tbody>
