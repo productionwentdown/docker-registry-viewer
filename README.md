@@ -44,3 +44,8 @@ docker run -d --restart=always \
 ### cmd-tool
 
 also provide a cmd tool, run `cmd-build.sh` to build
+
+### screenshots
+
+![homepage](readme-img/home.png)
+
