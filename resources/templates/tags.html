@@ -34,7 +34,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <a class="btn btn-danger btn-ok">确认</a>
+                            <button id="deleteConfirmBtn" type="button" class="btn btn-danger">确认</button>
                         </div>
                     </div>
                 </div>
@@ -91,13 +91,27 @@
 
         <script >
             $(document).ready(function () {
-                $('.delete-btn').attr("href", "#").on('click',function (e) {
+                $('.delete-btn').attr("href", "javascript:void(0)").on('click',function (e) {
                     e.preventDefault();
                 });
+
+                $("#deleteConfirmBtn").on("click", function(e) {
+                    var href = $(this).attr("href");
+                    $.get(href, function (data) {
+                        $("#deleteConfirm").modal("hide");
+                        window.location.reload();
+                    }).fail(function (data) {
+                        alert("fail:\n"+data.responseText);
+                        $("#deleteConfirm").modal("hide");
+                    });
+                });
+
                 $('#deleteConfirm').on('show.bs.modal', function (e) {
-                    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
                     $(this).find('#digest').html($(e.relatedTarget).data('digest'));
                     $(this).find('#image').html($(e.relatedTarget).data('image'));
+
+                    var href = $(e.relatedTarget).data('href')
+                    $(this).find("#deleteConfirmBtn").attr("href", href);
                 });
             });
         </script>
