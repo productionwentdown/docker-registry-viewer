@@ -11,7 +11,7 @@ COMMAND="export CGO_ENABLED=0 && go build -o /cmd-bin/regtool github.com/mkdym/d
 sudo rm -rf /tmp/docker-registry-viewer/cmd-bin
 docker run -ti --rm \
     -v `pwd`:/go/src/github.com/mkdym/docker-registry-viewer:ro \
-    -v /tmp/docker-registry-viewer/cmd-bin:/cmd-bin mkdym/golang:alpine-git \
+    -v /tmp/docker-registry-viewer/cmd-bin:/cmd-bin golang:1.7-alpine \
     /bin/sh -c "$COMMAND"
 
 sudo rm -rf ./cmd-bin
