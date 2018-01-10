@@ -6,10 +6,10 @@ pipeline:
       - GOOS=linux
       - GOARCH=amd64
     commands:
-      - go get ./...
+      - go get ./..
       - mkdir ./docker-bin
       - go build -ldflags '-extldflags "-static"' -o ./docker-bin/docker-registry-viewer
-  publish:
+  docker:
     image: plugins/docker
     registry: registry.labs.0x.no
     repo: registry.labs.0x.no/docker-registry-viewer
