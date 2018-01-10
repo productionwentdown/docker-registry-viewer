@@ -41,6 +41,10 @@ func main() {
 	}
 
 	gRegistry = fmt.Sprintf("%s:%s", registryHost, registryPort)
+	if registryProtocol == "https" && registryPort == "443" {
+		gRegistry = registryHost
+	}
+		
 	registryClient, err := client.NewRegistryClient(registryProtocol, gRegistry)
 	if err != nil {
 		panic(err)
