@@ -41,7 +41,7 @@
                             </tr>
                             {{range .repos}}
                             <tr>
-                                <td><a href="/tags/{{urlquery .Repo | urlquery}}">{{.Repo}}</a></td>
+                                <td><a href="/tags/{{.Repo}}">{{.Repo}}</a></td>
                                 <td><code>docker pull {{.registry}}/{{.Repo}}</code></td>
                                 <td>{{.Count}}</td>
                             </tr>

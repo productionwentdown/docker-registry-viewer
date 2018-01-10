@@ -65,14 +65,14 @@
                             </tr>
                             {{range .tags}}
                             <tr>
-                                <td><a href="/detail/{{urlquery .Name | urlquery}}/{{.Tag}}">{{.Tag}}</a></td>
+                                <td><a href="/detail/{{.Name}}/{{.Tag}}">{{.Tag}}</a></td>
                                 <td>{{.CreatedTime}}</td>
                                 <td>{{.DigestV2}}</td>
                                 <td>{{.HumanSize}}</td>
-                                <td><a href="/layers/{{urlquery .Name | urlquery}}/{{.Tag}}">{{len .Layers}}</a></td>
+                                <td><a href="/layers/{{.Name}}/{{.Tag}}">{{len .Layers}}</a></td>
                                 <td>
-                                    <a class="delete-btn" href="/delete/{{urlquery .Name | urlquery}}/{{.Tag}}"
-                                        data-href="/delete/{{urlquery .Name | urlquery}}/{{.Tag}}"
+                                    <a class="delete-btn" href="/delete/{{.Name}}/{{.Tag}}"
+                                        data-href="/delete/{{.Name}}/{{.Tag}}"
                                         data-image="{{$.registry}}/{{$.repo}}:{{.Tag}}" data-digest="{{.DigestV2}}"
                                         data-toggle="modal" data-target="#deleteConfirm">Delete</a>
                                 </td>
