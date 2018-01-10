@@ -6,7 +6,7 @@ pipeline:
       - GOOS=linux
       - GOARCH=amd64
     commands:
-      - go get ./..
+      - go get -d ./...
       - mkdir ./docker-bin
       - go build -ldflags '-extldflags "-static"' -o ./docker-bin/docker-registry-viewer
   docker:
