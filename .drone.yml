@@ -7,8 +7,8 @@ pipeline:
       - GOARCH=amd64
     commands:
       - go get -d ./...
-      - mkdir ./docker-bin
-      - go build -ldflags '-extldflags "-static"' -o ./docker-bin/docker-registry-viewer
+      - mkdir docker-bin
+      - go build -ldflags '-extldflags "-static"' -o docker-bin/docker-registry-viewer
   docker:
     image: plugins/docker
     registry: registry.labs.0x.no
